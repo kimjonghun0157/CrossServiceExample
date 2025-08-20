@@ -8,4 +8,6 @@ import lombok.Getter;
 public class UserSingleResponseDto {
 
     private String username;
+
+    private String email;
 }

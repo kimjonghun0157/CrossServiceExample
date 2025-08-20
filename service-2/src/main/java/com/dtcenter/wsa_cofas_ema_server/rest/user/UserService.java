@@ -1,28 +1,45 @@
 package com.dtcenter.wsa_cofas_ema_server.rest.user;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    @Transactional(readOnly = true)
+    public UserSingleResponseDto getUserByUsername(String username) {
+        User user = (User) userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다"));
+
+        return UserSingleResponseDto.builder()
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .build();
     }
 
-    @Transactional(readOnly = true)
-    public UserSingleResponseDto getUserById(Long id) {
+    @Transactional
+    public UserSingleResponseDto createUser(UserSingleRequestDto requestDto) {
 
-        Optional<User> byId = userRepository.findById(id);
+        if (userRepository.existsByUsername(requestDto.getUsername())) {
+            throw new RuntimeException("이미 존재하는 사용자명입니다");
+        }
 
-        User userNotFound = byId.orElseThrow(() -> new RuntimeException("User not found"));
+        User user = User.builder()
+                .username(requestDto.getUsername())
+                .password(requestDto.getPassword())
+                .build();
 
-        return UserSingleResponseDto.builder().username(userNotFound.getUsername()).build();
+        User savedUser = userRepository.save(user);
+
+        return UserSingleResponseDto.builder()
+                .username(savedUser.getUsername())
+                .build();
     }
 }
