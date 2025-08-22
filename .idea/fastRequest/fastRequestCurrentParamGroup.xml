@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="fastRequestCurrentParamGroup">
+    <option name="className" value="com.dtcenter.wsa_cofas_ema_server.rest.project.ProjectController" />
+    <option name="filePath" value="" />
+    <option name="method" value="getProjectByCode" />
+    <option name="module" value="com.dtcenter.wsa-cofas-ema-server" />
+    <option name="originUrl" value="/api/projects/{id}" />
+    <option name="pathParamMap">
+      <map>
+        <entry key="id">
+          <value>
+            <Object />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="responseParamMap">
+      <map>
+        <entry key="return">
+          <value>
+            <Object />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="returnDocument" value="{&quot;status&quot;:{},&quot;headers&quot;:{},&quot;body&quot;:{&quot;code&quot;:&quot;No comment,Type =String&quot;,&quot;name&quot;:&quot;No comment,Type =String&quot;,&quot;user&quot;:{&quot;username&quot;:&quot;No comment,Type =String&quot;,&quot;email&quot;:&quot;No comment,Type =String&quot;}}}" />
+    <option name="url" value="/api/projects/1" />
+  </component>
+</project>
